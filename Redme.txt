@@ -1,0 +1,102 @@
+Color Game
+
+Vamos a hacer un juego en el que tenés que adivinar colores. Las reglas son simples: se nos muestra un color escrito en rgb y 6 opciones del posible color, el usuario debe clickear estos colores hasta acertar el color correcto. Hay dos niveles de dificultad, en el fácil serán solo 3 opciones.
+
+Este será un camino guiado, vamos a darte instrucciones paso por paso de como tenés que ir realizando el juego. La clave está en que no pienses en el paso 6 antes de terminar los 5 pasos anteriores. Un consejo: HACÉ SIEMPRE PRIMERO LO PRIMERO
+
+Antes de empezar, asegurate de escribir tus funciones usando esta sintaxis:
+
+  function saludar() {
+      console.log('Hola!')
+  }
+
+Cuando escribimos las funciones de esta forma, JavaScript las guarda primero en la memoria antes de empezar a ejecutar el código. Esto hace que si ejecutamos una funcion antes de declararla funcione igual, porque JavaScript ya la había leído antes de empezar a correr nuestro programa. Esto nos va a servir para organizar mejor nuestro código, poniendo la definición de las funciones en una sección y el uso de las mismas en otra sección.
+
+// esto funciona sin problemas
+llamarBatman()
+
+// aunque la función se invoque antes de estar declarada en el código
+function llamarBatman() {
+  alert("Soy Batman, vengo a revolear las patas!")
+}
+
+Ahora sí, empecemos a codear!
+
+    En un documento HTML nuevo, crea un div con la clase 'container' y dentro de él 6 divs con la clase 'square'.
+
+    En una hoja de estilo que linkearemos a nuestro HTML haremos que .square tenga las siguientes reglas:
+        float: left; (para que se apilen uno al lado de otro)
+        ancho de 30%;
+        height: 0; y padding-bottom: 30%; para darles un alto determinado
+        un color de fondo
+        un margen para separar los cuadrados (Según los width, cuál debería ser el margen para que queden tres en ambas filas?). 
+
+    Para que nuestros cuadrados no ocupen todo el ancho de la página dale al contenedor un ancho máximo de 600px y centralo. Para centrar elementos block usábamos la propiedad margin: 0 auto; que distribuía el margen en iguales cantidades de cada lado. Agregale un background color al body: background-color: #232323.
+
+    Ahora usemos javascript para darle a cada cuadrado un color distinto. Para empezar creá un arreglo llamado colors y escribile a mano 6 colores cualquiera en formato rgb. Importante: escribí los colores en este formato exactamente, respetando los espacios: "rgb(240, 14, 128)". Más adelante vamos a comparar colores (que son strings), por lo que tienen que estar escritos en exactamente el mismo formato. Un espacio de más o de menos puede hacer que el juego no funcione.
+
+    Ahora vamos a asignarle a cada cuadrado uno de esos colores. Seleccioná todos los cuadrados usando querySelectorAll y recorrelos usando un for loop. En cada vuelta del loop asignale un color del arreglo colors. (Aprovechá la variable i, no solo para acceder al cuadrado específico, sino también al color.). Fijate si tus 6 cuadrados tienen los 6 colores que pusiste en el arreglo colors.
+
+Nota sobre selectores: recomendamos que a partir de ahora cada vez que seleccionemos un elemento utilicemos una variable para guardarlo, ya que seguramente lo usemos varias veces, y es mas fácil por ejemplo utilizar la variable square, que escribir siempre document.querySelectorAll(".square")
+
+    Ahora vamos a hacer que el título de la página muestre un color seleccionado de nuestro arreglo de colores. Crea un h1 que diga The Great Guessing Game y entre medio de great y guessing agregá un span#colorDisplay. Aquí pondremos el color seleccionado. Podés cambiar el color de letra del h1 a blanco para que se vea mejor en la página.
+
+    Ahora creemos la variable pickedColor, esta más adelante tendrá un color random seleccionado del arreglo, pero por ahora seleccionemos un color específico, por ejemplo colors[3] y demos su valor al texto de #colorDisplay. Fíjate que el color aparezca correctamente en el h1.
+
+    Ahora empecemos con un poco del juego. Queremos que cuando el usuario clickea el cuadrado que no corresponde con el color del título, este cuadrado desaparezca cambiando el background al mismo que el del body y aparezca un mensaje de que intente otra vez, y si adivina queremos que todos los cuadrados y el h1 tengan el color del cuadrado ganador y aparezca un mensaje de correcto. Para eso vamos a hacer lo siguiente:
+        Primero vamos a crear el lugar donde se mostrará el mensaje. Entre el título y el contenedor agregamos un nuevo div, y dentro de ese div un span#message. Puedes agregar la regla css para que el texto sea de color blanco.
+        Agreguemos un evento de click a cada uno de los cuadrados (Puedes aprovechar el loop que ya habiamos hecho antes.) 3.Primero tenemos que saber qué color del background tenia el cuadrado que clickeamos y guardarlo en la variable clickedColor, después comparamos clickedColor y pickedColor, para ver si son el mismo color.
+        Si son distintos, le damos a ese cuadrado el background color del body, y también queremos que muestre un mensaje de Try Again en nuesto span. Fijate si está funcionando correctamente cuando clickeás los colores equivocados.
+        Si son el mismo color, primero mostremos el mensaje Correct! en nuestro span. Le asignamos al h1 el background del color ganador y para cambiar el color de nuestros cuadrados vamos a hacer una función por fuera para mantener nuestro código ordenado. Así que dentro de una nueva función changeColors que tomará como argumento un color, itera sobre todos los cuadrados y dale el color de background del argumento. Ahora ejecuta la función en el momento que el usuario clickea el color correcto y pasale como argumento el color correcto. Ahora fijate si funciona correctamente cuando clickeas el color correcto. 
+
+    Ahora vamos a crear una función para asignarle a pickedColor un color random de nuestro arreglo de colores. Para eso vamos a crear la función pickColor que devuelva un color random:
+        Primero dentro de la función pickColor crea un número random entre los índices del arreglo colors.
+        Usa ese número random para devolver un color del arreglo.
+        Ahora aignale lo que devuelve la función a nuestra variable pickedColor. Fijate si cada vez que actualizar la página el color del h1 es distinto y si el juego sigue funcionando correctamente.
+
+    Crea la función randomColor para generar y devolver un color random(recuerda que rgb son siempre 3 números entre 0 y 255).
+
+    Ahora vamos a crear la función generateRandomColors, que creará de forma random nuestro arreglo de colores utilizando la función randomColor que acabamos de crear. La función tomará como argumento un número indicando la longitud de nuestro arreglo, ya que vamos a tener la posibilidad de que sean 6 o 3 cuadrados dependiendo si estamos jugando en easy o hard mode. El arreglo que devuelva esta función se lo asignaremos a nuestra variable colors. Fijate si ahora cada vez que cargás la página aparecen colores random en los cuadrados, y sigue funcionando el juego.
+
+    Ahora vamos a crear el botón de "Play Again?", que tiene dos funcionalidades, cuando estamos jugando el juego, nos ofrece pedir nuevos colores, pero si ganamos el juego nos ofrece jugar otra vez, en ambos casos el efecto es el mismo, reinicia el juego con nuevos colores.
+        Al div donde teníamos el mensaje de correct y try again, vamos a darle el id stripe.
+        Dentro del div agreguemos un button#reset que diga "New Colors"
+        Vayamos a nuestro css y seleccionemos #stripe, demos background blanco una altura de 30px y demosle text align center. Vamos a tener que poner el span que habíamos puesto en blanco a negro devuelta para poder verlo.
+        Ahora seleccionemos el botón de reset, y vamos a darle un event listener, que cuando hagamos click debería generar nuevos colores en nuestro arreglo, volver a elegir un color de ese arreglo para que sea el ganador y aparezca en #colorDisplay, y cambiar los colores de los cuadrados con nuestros nuevos colores. Fijate si todo sigue funcionando correctamente.
+        Cuando ganes agrega para que #reset cambie su texto a Play Again?
+        Ahora agregá en el listener de #reset para que cuando le hagamos click vuelva a decir New Colors. Y desaparezca el mensaje de try again o correct.
+        También volvé a resetear el background color de tu h1. Fijate si todo esta funcionando como debería.
+
+    Ahora vamos a crear los botones Easy y Hard.
+        Primero vamos a agregar los dos botones al final de nuestro div#stripe.
+        Vamos a darle a el botón de hard la clase selected para indicar que está seleccionado cuando carga la página.
+        Demos a la clase selected un background del color que queramos, no nos fijemos ahora en el estilo, solo queremos estar seguros que se mantenga seleccionado el modo en el que estamos jugando.
+        Demos a cada botón un id distinto, ahora crea un event listener a cada uno que cuando le hagas click le agregue la clase selected, y se la quite al otro. Fijate si funciona correctamente cuando clickeás ambos botones.
+        Ahora cuando hagamos click el botón easy vamos a querer generar nuevos colores, pero solo 3, y vamos a elegir un color ganador, y otra vez mostraremos en el título cual es el color ganador.
+        Ahora lo que haremos es a los primeros tres cuadrados le asignaremos los tres colores el arreglo , y para los otros 3 vamos a esconderlos. Para eso vamos a loopear sobre todos los cuadrados, y hacer una condicional dentro del loop que se fije que si para el índice en el que estamos hay un elemento definido en el arreglo colors, que sería un string con nuestro color, recordemos que un string es verdadero, le asigne el color a nuestro cuadrado, sino, osea que no hay ningún elemento en ese índice y por lo tanto nos devuelve undefined, que en si ya es falso, le cambie la propiedad css display del cuadrado a none, para que este se esconda. Fijémonos que cuando clickeamos easy los tres primeros cuadrados cambien de color, y los otros tres se escondan.
+        Enfoquémonos en el botón hard. Otra vez tenemos que generar nuevos colores (que esta vez vuelven a ser 6), elegir un color ganador y mostrar en el título cual es el color ganador. Como vemos nuestro código se empieza a repetir bastante, no te preocupes ya vamos a volver para atrás y refactorear un poco.
+        Ahora loopiemos a todos los cuadrados y asignémosle a todos un color del arreglo. Para poder volver a mostrar los cuadrados escondidos vamos a tener que darle a los cuadrados el valor block a la propiedad css display.Fíjate si después de ir a easy y volver a hard vuelven a aparecer los cuadrados escondidos y aparecen nuevos colores, también fijate si el juego sigue funcionando correctamente en ambos modos.
+
+    En este momento estamos teniendo un bug en nuestro juego, que es que cuando estoy en easy mode y clickeo #reset este va a generar 6 nuevos colores en el arreglo que no se van a mostrar en pantalla. Para solucionar este problema vamos a crear una variable numberOfSquares que trackee con cuantos cuadrados se está jugando en ese momento. La variable iniciará siendo 6. Cuando hagamos click en easy cambiará a 3, y cuando hagamos click en hard volverá a 6. Ahora cada vez que ejecutemos generateNumberColors ya no pasaremos el número hard codeado como argumento sino que pasaremos la variable numberOfSquares. Ahora fijate si solucionamos el bug fijándonos en la consola si cuando estamos en easy mode y clickeamos new colors el arreglo de colors tiene 3 o 6 elementos.
+
+    Ahora nuestro juego ya esta funcionando! Vayamos a darle un estilo mas atractivo, aquí tienes dos caminos posibles, o seguir el maqueteado del ejemplo, o crear tu propia version. Si elijes hacer tu propia versión, tienes q respetar lo siguiente:
+        Los botones de new colors, easy y hard, no deberían parecer botones clásicos, igual que en el ejemplo. Y no deberían tener una linea azul alrededor si lo clickeamos(outline).
+        El mensaje de correct y try again no tienen que mover los otros elementos cuando aparecen.
+        Los cuadrados deben desaparecer con un efecto de transición de css, investiga como hacer esto.
+
+Cualquier duda sobre colores, tamaños y tipografías los puedes averiguar usando el inspector de elementos.
+Refactoriando
+
+Hasta este punto nuestro juego nos funciona perfecto, pero podemos mejorar nuestro código, menos repetitivo y mas prolijo, veamos como hacer esto.
+
+    Los botones de Easy y Hard, tienen un event listener similar solo que lo q cambia es que uno muestra tres y otro 6 colores. para mejorar esto vamos a sacarles el id, y vamos hacer que ambos compartan la misma clase. Comenta las dos funciones de nuestros botones. Ahora seleccionemos los botones y agreguemos un event listener que haga lo siguiente:
+        Vamos a darle al botón que clickeamos la clase selected.
+        Ahora pensemos como actualizar numSquare. Para eso haremos una condicional donde dependiendo el textContent del botón que clickeamos, el valor de numSquare será 3 o 6. Podemos hacerlo usando un operador ternario para ahorrar líneas de código.
+        Ahora lo que deberíamos hacer es generar nuevos colores en nuestro arreglo, elegir un color ganador, y actualizar el display de la página correctamente. Esto lo estuvimos repitiendo varias veces en nuestro código. Vamos a meterlo directamente en una función reset para simplificar líneas y no repetir siempre lo mismo.
+        Nuestra función reset debería considerar el mismo if statement, donde dependiendo si hay un color mostramos el color, y si no hay lo escondemos. Esto funcionaría bien en easy y hard mode, te podés imaginar porque?
+    Ahora sigamos limpiando nuestro código: ahora que tenemos una función reset podemos borrar un poco nuestro código, por ejemplo cuando clickeamos el botón #reset, directamente podemos llamar a esa función.
+    También podemos usar nuestra función reset cuando recién carga la página, y esta podría estar en una nueva función init, donde pondríamos todo lo que necesita hacer cuando se carga la página, como el evento para nuestros botones de modo y el event listener de los cuadrados.
+    Ahora como nuestras variables, colors y pickedColor las va a definir reset, solo las deberíamos dejar definidas sin un valor.
+    Solo faltaría ejecutar init.
+    Como un último detalle si quiseramos dejar init bien prolijo, podríamos hacer dos funciones para los dos listeners que agregamos, y así init solo sería una función que ejecuta tres funciones.
+ 
