@@ -13,20 +13,42 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <title>P5 - Clase 15 - Color Game</title>
   </head>
+
   <body>
     <h1 class="title">The Great Guessing Game</h1>
     <p id="display">
       <span id="colorDisplay"></span>
     </p>
     <div id="menu">
-      <button id="nuevo" class="btn btn-warning" type="button">
-        ...::: Reset :::...
-      </button>
-      <!-- <button id="facil" class="btn btn-success" type="button">Facil</button>
-      <button id="dificil" class="btn btn-danger" type="button">Dificil</button> -->
+      <button id="reset" class="btn btn-primary" type="button">...::: Resat :::...</button>
+      <button id="facil" class="btn btn-success" type="button">Facil</button>
+      <button id="medio" class="btn btn-warning" type="button">Medio</button>
+      <button id="dificil" class="btn btn-danger" type="button">Dificil</button> 
     </div>
 
     <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="square"></div>
+        </div>
+        <div class="col order-12">
+          <div class="square"></div>
+        </div>
+        <div class="col order-1">
+          <div class="square"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="square"></div>
+        </div>
+        <div class="col order-12">
+          <div class="square"></div>
+        </div>
+        <div class="col order-1">
+          <div class="square"></div>
+        </div>
+      </div>
       <div class="row">
         <div class="col">
           <div class="square"></div>
